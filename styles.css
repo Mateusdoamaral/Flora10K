@@ -1,5 +1,6 @@
 :root {
   /* Cores */
+  --green-light: #5bae8b8e;
   --green-900: #013220;
   --green-600: #0b5d3b;
   --gold-500: #f2c94c;
@@ -112,42 +113,50 @@ body {
     linear-gradient(0deg, rgba(1, 50, 32, 0.15), rgba(1, 50, 32, 0.15));
 }
 
-/* Hero Grid (Desktop) */
+/* --- Hero Grid (Desktop) --- */
 @media (min-width: 992px) {
+  .hero {
+    align-items: center; /* MUDANÇA: Alinha o conteúdo ao centro verticalmente, em vez de em baixo */
+  }
+
   .hero__grid {
     display: grid;
     grid-template-columns: minmax(450px, 600px) 1fr;
     gap: var(--space-lg);
-    align-items: flex-end;
+    align-items: center; /* MUDANÇA: Alinha as colunas ao centro */
     position: relative;
     z-index: 1;
   }
+
   .hero__content {
-    align-self: flex-start;
-    padding-top: var(--space-xl);
+    align-self: center; /* MUDANÇA: Garante que o conteúdo de texto também se centraliza na sua coluna */
   }
+
   .hero__title {
     max-width: 100%;
-    font-size: clamp(32px, 3.5vw, 44px);
+    font-size: clamp(28px, 3.2vw, 40px);
     line-height: var(--lh-tight);
     letter-spacing: -0.015em;
   }
+
   .hero__subtitle {
     margin: var(--space-sm) 0 var(--space-lg);
   }
+
   .hero__image {
     display: flex;
     align-items: flex-end;
     justify-content: center;
     height: 100%;
+    align-self: flex-end; /* NOVO: Força APENAS esta coluna a ficar alinhada em baixo */
   }
+
   .hero__image img {
     max-width: 100%;
     height: auto;
-    max-height: 90vh;
+    max-height: 85vh; /* Ajuste para não ficar demasiado grande */
     object-fit: contain;
     filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3));
-    transform: translateY(5%);
   }
 }
 
@@ -366,13 +375,22 @@ body {
     grid-template-columns: 1fr 1fr;
   }
 }
-.card {
+.card--fit {
+  background: var(--green-light);
+  border: 1px solid var(--green-900);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: var(--space-md);
+}
+
+.card--nofit {
   background: #fff;
   border: 1px solid #e2eee8;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   padding: var(--space-md);
 }
+
 .card--fit .card__title {
   color: var(--green-900);
 }
@@ -390,12 +408,22 @@ body {
   width: 22px;
   height: 22px;
 }
+
 .card__list {
   margin: 0;
   padding-left: 18px;
   display: grid;
   gap: 10px;
 }
+
+.card--fit .card__list {
+  color: var(--green-900);
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+}
+
 .card__list li {
   line-height: 1.45;
 }
