@@ -629,3 +629,23 @@ details p {
 .section--with-bg .card--nofit .card__title svg {
     color: #ff909b; /* Um vermelho mais claro para contrastar */
 }
+
+/* --- Estilos do Logo no Hero --- */
+.hero__logo {
+  position: absolute;
+  top: var(--space-md);  /* 24px do topo */
+  right: var(--space-md); /* 24px da direita */
+  z-index: 3;             /* Garante que fique acima do overlay */
+
+  width: 130px; /* Tamanho do logo no desktop */
+  height: auto;   /* Mantém a proporção */
+}
+
+/* Ajuste de responsividade para o logo em ecrãs menores */
+@media (max-width: 767px) {
+  .hero__logo {
+    width: 100px; /* Logo um pouco menor no mobile */
+    top: var(--space-sm);   /* 16px do topo */
+    right: var(--space-sm);  /* 16px da direita */
+  }
+}
