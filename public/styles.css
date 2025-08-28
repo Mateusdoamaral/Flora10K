@@ -244,7 +244,7 @@ body {
   /* 4. Posiciona o conteúdo da ESQUERDA (formulário e trust-row) */
 .hero__content {
   position: absolute;
-  top: 70%; /* << PONTO DE PARTIDA - AJUSTE CONFORME O GOSTO */
+  top: 50%; /* << PONTO DE PARTIDA - AJUSTE CONFORME O GOSTO */
   left: 4%;
   width: 40%;
   max-width: 450px;
@@ -471,20 +471,26 @@ body {
     grid-template-columns: 1fr 1fr;
   }
 }
+
 .card--fit {
+  background: #7cdab317; /* Fundo de vidro */
+  backdrop-filter: blur(10px); /* Efeito de desfoque */
   background: var(--green-600);
   border: 1px solid var(--green-900);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   padding: var(--space-md);
+  border: 1px solid rgba(255, 255, 255, 0.2)
 }
 
 .card--nofit {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
   border: 1px solid #e2eee8;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   padding: var(--space-md);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px); /* Efeito de desfoque */
 }
 
 .card--fit .card__title {
@@ -665,18 +671,7 @@ details p {
     color: var(--green-900);
 }
 
-/* Deixa os cards com um efeito de vidro fosco semi-transparente */
-.section--with-bg .card {
-    background: rgba(255, 255, 255, 0.1); /* Fundo de vidro */
-    backdrop-filter: blur(10px); /* Efeito de desfoque */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
 /* Ajusta as cores do texto e ícones dentro dos cards para serem legíveis */
-.section--with-bg .card--fit .card__title,
-.section--with-bg .card--fit .card__list {
-    color: var(--green-900);
-}
 .section--with-bg .card--fit .card__title svg {
     color: var(--gold-500);
 }
@@ -707,4 +702,16 @@ details p {
     top: var(--space-sm);   /* 16px do topo */
     right: var(--space-sm);  /* 16px da direita */
   }
+}
+
+.countdown-section {
+  background-color: var(--green-900); /* Fundo verde escuro */
+  color: var(--white); /* Texto branco */
+  padding: var(--space-sm) 0; /* Espaçamento vertical pequeno para a barra */
+}
+
+/* Garante que o cronómetro dentro da nova seção esteja sempre centralizado */
+.countdown-section .countdown {
+  margin-top: 0; /* Remove a margem superior que já não é necessária */
+  justify-content: center;
 }
