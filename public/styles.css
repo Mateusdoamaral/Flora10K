@@ -85,115 +85,200 @@ body {
   border-width: 0;
 }
 
-/* Hero */
+/* --- HERO E COMPONENTES (CÓDIGO FINAL E CORRIGIDO) --- */
+
+/* 1. ESTILOS BASE (Mobile First) */
 .hero {
   position: relative;
   color: var(--white);
   overflow: hidden;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) 0;
   min-height: 90vh;
-  padding-bottom: var(--space-xl);
+  background-color: var(--green-900); /* Fundo verde para mobile */
 }
-.hero__bg, .hero__overlay {
-  position: absolute;
-  inset: 0;
+
+.hero__bg {
+  display: none; /* Imagem de fundo escondida no mobile */
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero__logo {
+  /* No mobile, o logo fica estático e centralizado */
+  position: static;
+  width: 120px;
+  height: auto;
+  margin-bottom: var(--space-md);
+}
+
+.hero__title, .hero__subtitle {
+  color: var(--white);
+}
+
+.hero__title {
+  font-size: var(--h1);
+  max-width: 25ch;
+  margin-bottom: var(--space-sm);
+}
+
+.hero__subtitle {
+  max-width: 45ch;
+  margin-bottom: var(--space-lg);
+}
+
+.countdown {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  position: static; /* Garante que ele fique no fluxo normal no mobile */
+  margin-top: var(--space-lg);
 }
-/*
-.hero__overlay {
-  background: linear-gradient(
-      180deg,
-      rgba(1, 50, 32, 0.88) 0%,
-      rgba(1, 50, 32, 0.88) 55%,
-      rgba(1, 50, 32, 0.78) 100%
-    ),
-    linear-gradient(0deg, rgba(1, 50, 32, 0.15), rgba(1, 50, 32, 0.15));
-}
-*/
-/* --- Hero Grid (Desktop) --- */
+
+
+/* 2. ESTILOS PARA DESKTOP (Ecrãs com 992px ou mais) */
 @media (min-width: 992px) {
-  .hero {
-    align-items: center; 
-  }
-
-  .hero__grid {
-    display: grid;
-    grid-template-columns: minmax(450px, 600px) 1fr;
-    gap: var(--space-lg);
-    align-items: center; 
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero__content {
-    /* REMOVIDO: margin-top: 200px; */
-    align-self: center; 
-    /* NOVO: Usamos transform para mover o bloco para baixo */
-    transform: translateY(150px); /* << Ajuste este valor para subir ou descer */
-    margin-bottom: 70px;
-    margin-left: -50px;
-    padding-right: 30px;
-  }
-
-  .hero__title {
-    color: transparent; /* CORRIGIDO: O texto volta a ser branco */
-    max-width: 100%;
-    font-size: clamp(28px, 3.2vw, 40px);
-    line-height: var(--lh-tight);
-    letter-spacing: -0.015em;
-  }
-
-  .hero__subtitle {
-    color: transparent; /* CORRIGIDO: O texto volta a ser branco */
-    margin: var(--space-sm) 0 var(--space-lg);
-  }
-
-  .hero__image {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    width: 100%;
-    align-self: flex-end; 
-  }
-
-  .hero__image img {
-    max-width: 100%;
-    height: auto;
-    max-height: 85vh; 
-    object-fit: contain;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.3));
-  }
-}
-
-/* Hero Layout (Mobile) */
-@media (max-width: 991px) {
+  
+  /* Ajustes do Container Principal do Hero */
   .hero {
     min-height: auto;
-    padding-top: var(--space-xl);
-    align-items: center;
+    aspect-ratio: 1080 / 1350; /* Proporção da imagem */
+    background-color: transparent;
+    align-items: initial;
+    justify-content: initial;
   }
-  .hero__grid {
-    position: relative;
-    z-index: 1;
-    text-align: center;
+
+  /* Mostra a imagem de fundo */
+  .hero__bg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
   }
-  .hero__content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  /* Posiciona o Logo no canto superior direito */
+  .hero__logo {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 130px;
+    z-index: 3;
   }
-  .hero__title {
-    text-align: left;
-    font-size: 20px;
-    max-width: 15ch;
-    margin: -28px 0 var(--space-sm);
-  }
-  .hero__image {
+
+  /* Esconde o texto HTML (que já está na imagem) */
+  .hero__title,
+  .hero__subtitle {
     display: none;
+  }
+  
+  /* Posiciona o conteúdo da esquerda (formulário e trust-row) */
+  .hero__content {
+    position: absolute;
+    top: 70%;
+    left: 4%;
+    width: 40%;
+    max-width: 450px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /* Posiciona o Cronómetro no canto inferior direito */
+  .countdown {
+    position: absolute;
+    bottom: 2%;
+    right: 4%;
+    width: auto;
+    margin-top: 0;
+  }
+
+  /* Garante a legibilidade dos rótulos do formulário */
+  .form__group label {
+    color: var(--white);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* --- AJUSTES FINAIS DO HERO PARA DESKTOP --- */
+@media (min-width: 992px) {
+  /* 1. Ajuste do Container Principal do Hero */
+  .hero {
+    min-height: auto;
+    aspect-ratio: 4269 / 2400;
+    background-color: transparent;
+  }
+
+  /* 2. Garante que a imagem de fundo preencha o container */
+  .hero__bg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  /* 3. Esconde os elementos que já estão na imagem de fundo */
+  .hero__logo,
+  .hero__title,
+  .hero__subtitle {
+    display: none;
+  }
+  
+  /* 4. Posiciona o conteúdo da ESQUERDA (formulário e trust-row) */
+.hero__content {
+  position: absolute;
+  top: 70%; /* << PONTO DE PARTIDA - AJUSTE CONFORME O GOSTO */
+  left: 4%;
+  width: 40%;
+  max-width: 450px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* --- ESTILO DEFINITIVO PARA O CRONÓMETRO --- */
+
+/* Regra Base (Aplicada a todos os ecrãs, especialmente o mobile) */
+.countdown {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  position: static; /* Garante que ele fique no fluxo normal */
+  margin-top: var(--space-lg);
+}
+
+/* Regra de Exceção (Aplicada APENAS no desktop) */
+@media (min-width: 992px) {
+  .countdown {
+    position: absolute;
+    bottom: 2%;
+    right: 4%;
+    width: auto; /* Anula a largura de 100% do mobile */
+    margin-top: 0;
+  }
+}
+
+  /* 6. Garante a legibilidade dos rótulos do formulário */
+  .form__group label {
+    color: var(--white);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -543,32 +628,6 @@ details p {
 .observe.in {
   opacity: 1;
   transform: none;
-}
-
-/* --- Posicionamento do Cronómetro no Hero (Desktop) --- */
-@media (min-width: 992px) {
-  .hero__grid {
-    /* Garante que o grid ocupe o espaço para o posicionamento funcionar */
-    width: 100%;
-  }
-
-  .countdown {
-    position: absolute;
-    bottom: var(--space-xl); /* Distância da base */
-    right: var(--space-xl);  /* Distância da direita */
-    z-index: 2;              /* Garante que fique acima do fundo */
-
-    /* Remove a margem que ele tinha para não interferir */
-    margin-top: 0;
-  }
-}
-
-/* Opcional: Pequeno ajuste para o conteúdo esquerdo no desktop */
-@media (min-width: 992px) {
-    .hero__content {
-        /* Adiciona um espaçamento em baixo para compensar a saída do cronómetro */
-        padding-bottom: var(--space-lg);
-    }
 }
 
 /* --- Estilos para Seção com Imagem de Fundo (Responsivo) --- */
